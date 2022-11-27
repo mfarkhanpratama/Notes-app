@@ -1,23 +1,55 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import Main from './components/Main';
+import Sidebar from './components/Sidebar';
+import uuid from 'react-uuid'
 
 function App() {
+  
+  const [notes,setNotes] = useState(JSON.parse(localStorage.notes) || []);
+  const [activeNote , setActiveNote] = useState(false);
+
+  useEffect(()=>{
+    localStorage.setItem('notes' , JSON.stringify(notes));
+  },[notes])
+
+  const onAddNote = () => {
+    const newNote = {
+      id : uuid(),
+      title : 'Untitled Note',
+      body : ' ',
+      lastModified : Date.now(),
+
+    };
+
+    setNotes([newNote , ...notes])
+  }
+
+  const onUpdateNote = (updatedNote)=>{
+    const updatedNotesArray = notes.map((note)=>{
+      if(note.id === activeNote){
+        return updatedNote;
+      }
+
+      return note
+    })
+
+    setNotes(updatedNotesArray);
+  }
+
+  const onDeleteNote = (idToDelete) => {
+    setNotes(notes.filter((note)=> note.id !== idToDelete))
+  }
+
+  const getActiveNote = ()=>{
+    return notes.find((note)=> note.id === activeNote)
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Sidebar notes={notes} onAddNote={onAddNote} onDeleteNote={onDeleteNote} activeNote={activeNote} setActiveNote={setActiveNote}/>
+      <Main activeNote={getActiveNote()} onUpdateNote={onUpdateNote}/>
     </div>
   );
 }
