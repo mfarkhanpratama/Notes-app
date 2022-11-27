@@ -14,6 +14,7 @@ body,
   height: 100vh;
   overflow: hidden;
   font-size: 16px;
+  background: url(https://www.toptal.com/designers/subtlepatterns/patterns/lightpaperfibers.png);
 }
 
 button {
@@ -51,30 +52,31 @@ button:hover {
   margin: 0;
 }
 
-.app-sidebar-note{
-  height: calc(100vh-78px);
-  overflow-y: scroll;
+.app-sidebar-search{
+  height: 30px;
+  margin: 0 25px;
+  border-bottom: 1px solid #ddd;
 }
 
-.app-sidebar-note{
+.app-sidebar-notes {
+  height: calc(100vh - 98px);
+  overflow-y: scroll;
+}
+.app-sidebar-note {
   padding: 25px;
   cursor: pointer;
 }
-
-.sidebar-note-tittle{
+.sidebar-note-title {
   display: flex;
   justify-content: space-between;
 }
-
-.sidebar-note-tittle button{
+.app-sidebar-note button {
   color: crimson;
 }
-
-.app-sidebar-note .paragraf{
+.app-sidebar-note p {
   margin: 10px 0;
 }
-
-.app-sidebar-note small{
+.app-sidebar-note small {
   display: block;
   color: #999;
 }
@@ -82,14 +84,13 @@ button:hover {
 .app-sidebar-note:hover {
   background: #ddd;
 }
-
 .app-sidebar-note.active,
 .app-sidebar-note.active small {
   background: #08c;
   color: white;
 }
 
-/* main style */
+/* NOTE EDITOR/PREVIEW (MAIN) STYLES */
 
 .app-main {
   width: 70%;
